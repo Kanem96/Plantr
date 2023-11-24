@@ -1,8 +1,14 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
-import Input from "../components/Input";
+import React, { useState } from "react";
+import Input from "../(components)/Input";
 
 const SignInPage = () => {
+  const [email, setEmail] = useState();
+  const [name, setName] = useState();
+  const [password, setPassword] = useState();
+
   return (
     <div className="relative h-full w-full bg-[url('/images/background.jpg')] bg-cover bg-center bg-fixed bg-no-repeat">
       <div className="bg-white w-full h-full lg:bg-opacity-30">
@@ -15,7 +21,27 @@ const SignInPage = () => {
               Sign In
             </h2>
             <div className="flex flex-col gap-4">
-              <Input />
+              <Input
+                label="Email"
+                onChange={(event) => setEmail(event.target.value)}
+                id="email"
+                type="email"
+                value={email}
+              />
+              <Input
+                label="Name"
+                onChange={(event) => setName(event.target.value)}
+                id="name"
+                type="name"
+                value={name}
+              />
+              <Input
+                label="Password"
+                onChange={(event) => setPassword(event.target.value)}
+                id="password"
+                type="password"
+                value={password}
+              />
             </div>
           </div>
         </div>
