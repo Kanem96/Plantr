@@ -17,15 +17,15 @@ const sidebarItems = [
 
 const SideBar = () => {
   return (
-    <aside className="h-full border-r border-lime-100 flex flex-col overflow-y-auto bg-inherit shadow-sm w-60">
-      <div className="flex flex-col w-full p-6">
+    <aside className="h-full border-r flex flex-col overflow-y-auto bg-inherit shadow-sm">
+      <div className="p-6">
         <Image
           src="/images/logo.png"
           alt="plantr logo"
           width={100}
           height={100}
           className="text-black justify-self-center"
-        ></Image>
+        />
         <div className="flex flex-col w-full mt-6">
           {sidebarItems.map(({ icon: Icon, ...item }) => {
             return (
