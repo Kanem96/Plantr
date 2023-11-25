@@ -23,8 +23,14 @@ const SignInPage = () => {
         <nav className="px-12 py-5">
           <Image src="/images/logo.png" alt="logo" width={70} height={70} />
         </nav>
-        <div className="flex justify-center">
-          <div className="bg-lime-100 bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
+        <div className="flex flex-col justify-center gap-20 lg:flex-row">
+          <div className="flex px-16 py-8 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full pb-0 lg:py-16">
+            <p className="text-5xl font-semibold tracking-wider">
+              <span className="text-lime-600">Plantr</span> helping you, help
+              your plants.
+            </p>
+          </div>
+          <div className="bg-lime-100 bg-opacity-70 px-16 py-16 my-0 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full lg:my-16">
             <h2 className="text-green-800 text-4xl mb-8 font-semibold">
               {variant === "signin" ? "Sign In" : "Sign Up"}
             </h2>
