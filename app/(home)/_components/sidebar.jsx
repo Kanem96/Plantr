@@ -18,7 +18,7 @@ const sidebarItems = [
 const SideBar = () => {
   return (
     <aside className="h-full border-r border-lime-100 flex flex-col overflow-y-auto bg-inherit shadow-sm w-60">
-      <div className="flex flex-col w-full p-4">
+      <div className="flex flex-col w-full p-6">
         <Image
           src="/images/logo.png"
           alt="plantr logo"
