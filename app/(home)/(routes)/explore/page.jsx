@@ -1,5 +1,6 @@
 "use client";
 import getPlants from "@/actions/getPlants";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const ExplorePlants = () => {
@@ -27,7 +28,11 @@ const ExplorePlants = () => {
       {loading ? (
         <p>Loading...</p>
       ) : Array.isArray(plants) ? (
-        plants.map((plant) => <p key={plant.id}>{plant.id}</p>)
+        plants.map((plant) => (
+          <React.Fragment key={plant.id}>
+            <p>{plant["common_name"]}</p>
+          </React.Fragment>
+        ))
       ) : (
         <p>Plants data is not an array</p>
       )}

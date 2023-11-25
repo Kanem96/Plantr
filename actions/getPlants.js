@@ -5,8 +5,8 @@ const getPlants = async () => {
     const plants = await axios.get(
       `https://perenual.com/api/species-list?key=${process.env.PERENUAL_API_KEY}`
     );
-    console.log(plants.data);
-    return plants.data;
+    console.log(plants.data.data);
+    return plants.data.data;
   } catch (error) {
     console.log("getPlants", error);
     return [];
