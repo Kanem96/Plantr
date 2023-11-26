@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useCallback, useState } from "react";
 import Input from "../(components)/Input";
 
-import postUser from "@/actions/postUser";
+import signUpHandler from "../api/signup";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ const SignInPage = () => {
 
   const signUp = useCallback(async () => {
     try {
-      await postUser({
+      await signUpHandler({
         email,
         name,
         password,
