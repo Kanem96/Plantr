@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import getPlant from "@/actions/getPlant";
-import Image from "next/image";
 import PlantCard from "@/app/(components)/plantcard";
 
 const Plant = () => {
@@ -34,15 +33,15 @@ const Plant = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <React.Fragment key={plant.id}>
+        <React.Fragment key={plant.plantId}>
           <PlantCard
-            id={plant.id}
-            name={plant.commonName}
+            id={plant.plantId}
+            name={plant["common_name"]}
             watering={plant.watering}
             imgUrl={
-              plant.images && plant.images[0]
-                ? plant.images[0].original_url
-                : "https://perenual.com/storage/species_image/1_abies_alba/regular/1536px-Abies_alba_SkalitC3A9.jpg"
+              plant.default_image
+                ? plant.default_image.original_url
+                : plant.default_image?.licence_url
             }
           />
         </React.Fragment>
