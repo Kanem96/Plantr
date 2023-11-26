@@ -5,6 +5,7 @@ import React, { useCallback, useState } from "react";
 import Input from "../(components)/Input";
 
 import signUpHandler from "../api/signup";
+import { useRouter } from "next/navigation";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ const SignInPage = () => {
   const [password, setPassword] = useState("");
 
   const [variant, setVariant] = useState("signin");
+
+  const router = useRouter();
 
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
@@ -26,10 +29,12 @@ const SignInPage = () => {
         name,
         password,
       });
+
+      router.push("/home");
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
-  }, [email, name, password]);
+  }, [email, name, password, router]);
 
   return (
     <div className="relative h-full w-full bg-[url('/images/background.jpg')] bg-cover bg-center bg-fixed bg-no-repeat">

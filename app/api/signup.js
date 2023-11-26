@@ -6,16 +6,15 @@ const signUpHandler = async (data) => {
   try {
     const { email, name, password } = data;
 
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const userId = Math.round(Math.random() * 1000);
+    const passwordHash = await bcrypt.hash(password, 12);
 
     const user = await postUser({
-      userId,
       name,
       email,
-      hashedPassword,
+      passwordHash,
     });
 
+    console.log(user, "in signup");
     return user;
   } catch (error) {
     console.log(error);

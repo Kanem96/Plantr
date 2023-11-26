@@ -6,7 +6,7 @@ const postUser = async (data) => {
       `https://elegant-tick-vestments.cyclic.app/users`,
       data
     );
-    console.log(user);
+    console.log(user, "in postUSER");
     return user;
   } catch (error) {
     console.log("postUser", error);
