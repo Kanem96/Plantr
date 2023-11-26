@@ -1,36 +1,39 @@
-"use client";
-import getPlants from "@/actions/getPlants";
-import PlantCard from "@/app/(components)/plantcard";
-import Image from "next/image";
+'use client'
+ 
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from 'next/navigation'
+import getPlant from "@/actions/getPlant";
+import Image from "next/image";
+import PlantCard from "@/app/(components)/plantcard";
 
-const ExplorePlants = () => {
-  const [plants, setPlants] = useState([]);
+const Plant = () => {
+  const [plant, setPlant] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const searchParams = useSearchParams()
+  const id = searchParams.get('id')
+
   useEffect(() => {
-    const fetchPlants = async () => {
+    const fetchPlant = async () => {
       try {
-        const allPlants = await getPlants();
-        setPlants(allPlants);
+        const plant = await getPlant(id);
+        setPlant(plant);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching plants:", error);
-        setPlants([]);
+        setPlant([]);
         setLoading(false);
       }
     };
 
-    fetchPlants();
+    fetchPlant();
   }, []);
 
   return (
     <div className="flex flex-row flex-wrap gap-8 mt-20 p-8 mx-auto">
       {loading ? (
         <p>Loading...</p>
-      ) : Array.isArray(plants) ? (
-        plants.map((plant) => (
-          <React.Fragment key={plant.id}>
+      ) : <React.Fragment key={plant.id}>
             <PlantCard
               id={plant.id}
               name={plant["common_name"]}
@@ -42,12 +45,9 @@ const ExplorePlants = () => {
               }
             />
           </React.Fragment>
-        ))
-      ) : (
-        <p>Plants data is not an array</p>
-      )}
+      }
     </div>
   );
 };
 
-export default ExplorePlants;
+export default Plant;
