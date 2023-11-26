@@ -31,6 +31,7 @@ const SideBar = () => {
             return (
               <SideBarItem
                 key={item.id}
+                id={item.id}
                 icon={item.icon}
                 label={item.label}
                 href={item.link}

@@ -4,6 +4,7 @@ import { usePlants } from "@/providers/plantprovider";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
+import Spinner from "../../_components/spinner";
 
 const Home = () => {
   const { plants, loading } = usePlants();
@@ -32,7 +33,9 @@ const Home = () => {
           <h3 className="text-2xl font-bold mt-4">Find a new plant</h3>
           <div className="flex flex-row flex-wrap gap-8 pt-4">
             {loading ? (
-              <p>Loading...</p>
+              <div className="w-full">
+                <Spinner></Spinner>
+              </div>
             ) : (
               sliceOfPlants.map((plant) => (
                 <React.Fragment key={plant.id}>

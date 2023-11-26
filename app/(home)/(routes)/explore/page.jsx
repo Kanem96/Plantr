@@ -2,14 +2,17 @@
 import PlantCard from "@/app/(components)/plantcard";
 import { usePlants } from "@/providers/plantprovider";
 import React from "react";
+import Spinner from "../../_components/spinner";
 
 const ExplorePlants = () => {
   const { plants, loading } = usePlants();
 
   return (
-    <div className="flex flex-row flex-wrap gap-8 mt-20 p-8 mx-auto">
+    <div className="flex flex-row flex-wrap gap-8 mt-20 p-8 mx-auto h-full">
       {loading ? (
-        <p>Loading...</p>
+        <div className="w-full h-3/4 flex justify-center items-center">
+          <Spinner></Spinner>
+        </div>
       ) : (
         plants.map((plant) => (
           <React.Fragment key={plant.id}>
