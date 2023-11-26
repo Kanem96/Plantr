@@ -46,6 +46,11 @@ const Plant = () => {
           />
         </React.Fragment>
       )}
+      <section>
+        <h3 className="text-xl">Name: {plant["common_name"]}</h3>
+        <p className="">{plant.scientific_name}</p>
+        <p>How often should you water me? {plant.watering}</p>
+      </section>
     </div>
   );
 };
