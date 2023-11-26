@@ -28,23 +28,21 @@ const ExplorePlants = () => {
     <div className="flex flex-row flex-wrap gap-8 mt-20 p-8 mx-auto">
       {loading ? (
         <p>Loading...</p>
-      ) : Array.isArray(plants) ? (
+      ) : (
         plants.map((plant) => (
           <React.Fragment key={plant.id}>
             <PlantCard
               id={plant.id}
-              name={plant["common_name"]}
+              name={plant.commonName}
               watering={plant.watering}
               imgUrl={
-                plant.default_image
-                  ? plant.default_image.original_url
-                  : plant.default_image?.licence_url
+                plant.images && plant.images[0]
+                  ? plant.images[0].original_url
+                  : "https://perenual.com/storage/species_image/1_abies_alba/regular/1536px-Abies_alba_SkalitC3A9.jpg"
               }
             />
           </React.Fragment>
         ))
-      ) : (
-        <p>Plants data is not an array</p>
       )}
     </div>
   );
