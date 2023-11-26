@@ -9,7 +9,8 @@ const Home = () => {
   const { plants, loading } = usePlants();
   const router = useRouter();
 
-  const firstFivePlants = plants.slice(0, 10);
+  const sliceOfPlants = plants.slice(0, 10);
+
   return (
     <div className="flex flex-col sm:flex-row px-6 gap-4">
       <section className="h-screen pr-6 sm:border-r pt-[100px] border-neutral-150 w-[70%]">
@@ -33,7 +34,7 @@ const Home = () => {
             {loading ? (
               <p>Loading...</p>
             ) : (
-              firstFivePlants.map((plant) => (
+              sliceOfPlants.map((plant) => (
                 <React.Fragment key={plant.id}>
                   <PlantCard
                     id={plant.id}
