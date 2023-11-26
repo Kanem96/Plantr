@@ -7,6 +7,7 @@ import { PiPlant } from "react-icons/pi";
 import { FaSearch } from "react-icons/fa";
 import { IoPeopleOutline } from "react-icons/io5";
 import SideBarItem from "./sidebar-item";
+import { MdOutlineLogout } from "react-icons/md";
 
 const sidebarItems = [
   { id: 1, label: "Home", icon: MdOutlineDashboard, link: "/home" },
@@ -38,6 +39,11 @@ const SideBar = () => {
               />
             );
           })}
+        </div>
+        <div className="flex flex-row absolute bottom-0 mb-4 ml-4 items-center justify-center">
+          <a className="flex items-center cursor-pointer text-red-500" href="/">
+            Sign Out <MdOutlineLogout className="pl-2" size={25} />
+          </a>
         </div>
       </div>
     </aside>
