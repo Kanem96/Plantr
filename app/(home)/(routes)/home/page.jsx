@@ -6,8 +6,11 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import Spinner from "../../_components/spinner";
 import { useUsersPlants } from "@/providers/users-plants-provider";
+import { useSession } from "next-auth/react";
 
 const Home = () => {
+  const { data: session, status } = useSession();
+  console.log(session, status);
   const { plants, loading } = usePlants();
   const { usersPlants } = useUsersPlants();
   const router = useRouter();
