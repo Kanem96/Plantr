@@ -38,9 +38,9 @@ const Home = () => {
               </div>
             ) : (
               sliceOfPlants.map((plant) => (
-                <React.Fragment key={plant.id}>
+                <React.Fragment key={plant.plantId}>
                   <PlantCard
-                    id={plant.id}
+                    id={plant.plantId}
                     name={plant.commonName}
                     watering={plant.watering}
                     imgUrl={
