@@ -4,10 +4,12 @@ import Image from "next/image";
 import React, { useCallback, useState } from "react";
 import Input from "../(components)/Input";
 
+import postUser from "@/actions/postUser";
+
 const SignInPage = () => {
-  const [email, setEmail] = useState();
-  const [name, setName] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
 
   const [variant, setVariant] = useState("signin");
 
@@ -16,6 +18,18 @@ const SignInPage = () => {
       currentVariant === "signin" ? "signup" : "signin"
     );
   }, []);
+
+  const signUp = useCallback(async () => {
+    try {
+      await postUser({
+        email,
+        name,
+        password,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [email, name, password]);
 
   return (
     <div className="relative h-full w-full bg-[url('/images/background.jpg')] bg-cover bg-center bg-fixed bg-no-repeat">
@@ -59,7 +73,10 @@ const SignInPage = () => {
                 value={password}
               />
             </div>
-            <button className="bg-green-800 py-3 text-white rounded-md w-full mt-10 hover:bg-green-900 transition">
+            <button
+              className="bg-green-800 py-3 text-white rounded-md w-full mt-10 hover:bg-green-900 transition"
+              onClick={signUp}
+            >
               {variant === "signin" ? "Sign In" : "Create an account"}
             </button>
             <p className="text-lime-500 mt-12">
