@@ -1,12 +1,11 @@
 import getUser from "@/actions/getUser";
 import { compare } from "bcrypt";
-import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
 
-NextAuth({
+const options = {
   providers: [
     Credentials({
-      id: "crendentials",
+      id: "credentials",
       name: "Credentials",
       credentials: {
         email: {
@@ -19,12 +18,13 @@ NextAuth({
         },
       },
       async authorize(credentials) {
-        if (credentials?.email || credentials?.password) {
+        if (!credentials?.email || !credentials?.password) {
           throw new Error("Email and password required");
         }
 
         const user = await getUser(credentials.email);
 
+        console.log(user);
         if (!user || !user.passwordHash) {
           throw new Error("Email does not exist");
         }
@@ -52,9 +52,7 @@ NextAuth({
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
-  secret: {
-    secret: process.env.NEXTAUTH_SECRET,
-  },
-});
+  secret: process.env.NEXTAUTH_SECRET,
+};
 
-export default NextAuth;
+export default options;

@@ -3,15 +3,14 @@
 import Image from "next/image";
 import React, { useCallback, useState } from "react";
 import Input from "../(components)/Input";
-
 import signUpHandler from "../api/signup";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-
   const [variant, setVariant] = useState("signin");
 
   const router = useRouter();
@@ -22,6 +21,21 @@ const SignInPage = () => {
     );
   }, []);
 
+  const logIn = useCallback(async () => {
+    try {
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+        callbackUrl: "/",
+      });
+
+      router.push("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  }, [email, password, router]);
+
   const signUp = useCallback(async () => {
     try {
       await signUpHandler({
@@ -30,11 +44,11 @@ const SignInPage = () => {
         password,
       });
 
-      router.push("/home");
+      logIn();
     } catch (error) {
       console.log(error.message);
     }
-  }, [email, name, password, router]);
+  }, [email, name, password, logIn]);
 
   return (
     <div className="relative h-full w-full bg-[url('/images/background.jpg')] bg-cover bg-center bg-fixed bg-no-repeat">
@@ -80,7 +94,7 @@ const SignInPage = () => {
             </div>
             <button
               className="bg-green-800 py-3 text-white rounded-md w-full mt-10 hover:bg-green-900 transition"
-              onClick={signUp}
+              onClick={variant === "signin" ? logIn : signUp}
             >
               {variant === "signin" ? "Sign In" : "Create an account"}
             </button>
