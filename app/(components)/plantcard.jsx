@@ -16,7 +16,7 @@ const PlantCard = ({ id, name, watering, imgUrl }) => {
           alt={`Image of ${name}`}
           width={200}
           height={200}
-          className="rounded h-[200px] w-[200px] overflow-hidden"
+          className="rounded h-[200px] w-[200px] overflow-hidden opacity-90"
         />
         <p>{name}</p>
         <p>{watering}</p>
