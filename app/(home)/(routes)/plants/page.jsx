@@ -1,22 +1,18 @@
 "use client";
-import getUser from "@/actions/getUser";
+
+import { useUsersPlants } from "@/providers/users-plants-provider";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import Spinner from "../../_components/spinner";
 
 const Plants = () => {
-  const [usersPlants, setUsersPlants] = useState([]);
+  const { usersPlants, loading } = useUsersPlants();
 
-  useEffect(() => {
-    const fetchUsersPlants = async () => {
-      const user = await getUser(1);
-      const plants = user.plants;
-      setUsersPlants(plants);
-    };
-
-    fetchUsersPlants();
-  }, []);
-
-  return (
+  return loading ? (
+    <div className="w-full">
+      <Spinner></Spinner>
+    </div>
+  ) : (
     <div className="flex flex-col mt-20 p-8 mx-auto">
       <h2 className="text-black text-2xl">Your plants</h2>
       {usersPlants ? (

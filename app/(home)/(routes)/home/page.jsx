@@ -5,9 +5,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import Spinner from "../../_components/spinner";
+import { useUsersPlants } from "@/providers/users-plants-provider";
 
 const Home = () => {
   const { plants, loading } = usePlants();
+  const { usersPlants } = useUsersPlants();
   const router = useRouter();
 
   const sliceOfPlants = plants.slice(0, 10);
@@ -61,7 +63,16 @@ const Home = () => {
           </button>
         </div>
       </section>
-      <section className="pt-[100px]">Your Plants</section>
+      <section className="pt-[100px]">
+        <h3 className="text-2xl font-bold">Your plants</h3>
+        {usersPlants ? (
+          usersPlants.map((usersPlant) => {
+            <p>{usersPlant.commonName}</p>;
+          })
+        ) : (
+          <p>No plants</p>
+        )}
+      </section>
     </div>
   );
 };
