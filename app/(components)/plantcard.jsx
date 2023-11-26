@@ -1,9 +1,21 @@
+import getUserId from "@/actions/getUserId";
+import postUserPlant from "@/actions/postUserPlant";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { IoWater } from "react-icons/io5";
+import { RiAddCircleLine } from "react-icons/ri";
 
 const PlantCard = ({ id, name, watering, imgUrl }) => {
+  const [ showAddBtn, setShowAddBtn] = useState(false)
+  const { data } = useSession()
+  // postUserPlant(data.user)
+  const addPlant = async () => {
+    console.log("adding plant")
+    const userId = await getUserId(data.user)
+    await postUserPlant(userId, {plantId: id, name, watering, imgUrl})
+  }
   return (
     <Link
       href={{
@@ -11,7 +23,9 @@ const PlantCard = ({ id, name, watering, imgUrl }) => {
         query: { id: id },
       }}
     >
-      <div className="flex flex-col items-center justify-evenly p-2 bg-white w-[360px] h-[360px] md:w-60 md:h-60 rounded shadow-sm hover:bg-neutral-50 cursor-pointer">
+      <div onMouseEnter={() => setShowAddBtn(true)}
+        onMouseLeave={() => setShowAddBtn(false)}
+        className="relative flex flex-col items-center justify-evenly p-2 bg-white w-[360px] h-[360px] md:w-60 md:h-60 rounded-md shadow-sm hover:bg-neutral-50 cursor-pointer">
         <Image
           src={imgUrl}
           alt={`Image of ${name}`}
@@ -27,6 +41,9 @@ const PlantCard = ({ id, name, watering, imgUrl }) => {
           <p className="text-neutral-600 font-semibold text-2xl md:text-sm">
             {watering}
           </p>
+        </div>
+        <div className={`${showAddBtn ? "" : "hidden"} absolute flex justify-center items-center bg-[#0000001f] w-full h-full`}>
+          <RiAddCircleLine size={50} className="text-green-300"/>
         </div>
       </div>
     </Link>
