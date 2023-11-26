@@ -1,9 +1,10 @@
 import axios from "axios";
 
-const getUser = async (email) => {
+const getUser = async (userId) => {
   try {
-    const user = await axios.get(`http://localhost:3001/users/${email}`);
-    console.log(user.data);
+    const user = await axios.get(
+      `https://elegant-tick-vestments.cyclic.app/users/${userId}`
+    );
     return user.data;
   } catch (error) {
     console.log("getUser", error);
