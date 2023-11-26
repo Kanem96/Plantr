@@ -24,6 +24,15 @@ NEXTAUTH_JWT_SECRET='NEXT-JWT-SECRET'
 NEXTAUTH_SECRET='NEXT-SECRET'
 NEXTAUTH_URL=http://localhost:3000/api/auth
 
+If there's issues getting past login screen comment out this code in home > page.tsx file : 
+
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (!session) {
+    router.push("/");
+  }
+
 
 ## About the app
 
